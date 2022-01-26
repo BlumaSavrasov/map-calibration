@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 public class RankedRoad {
     private LocalDate localDate;
     private int roadId;
-    private int[] eventRanks;
+    private List<RankedEvent> eventRanks;
 }

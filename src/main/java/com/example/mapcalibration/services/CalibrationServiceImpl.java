@@ -3,6 +3,7 @@ package com.example.mapcalibration.services;
 import com.example.mapcalibration.constant.EventType;
 import com.example.mapcalibration.dao.QualityEventRepo;
 import com.example.mapcalibration.model.QualityEvent;
+import com.example.mapcalibration.model.RankedEvent;
 import com.example.mapcalibration.model.RankedRoad;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,15 +29,15 @@ public class CalibrationServiceImpl implements CalibrationService {
     private RankedRoad rankRoad(QualityEvent qualityEvent) {
         LocalDate localDate = qualityEvent.getLocalDate();
 
-        int[] ranks = Arrays.stream(EventType.values())
-                .mapToInt(eventType -> calculateRank(localDate, eventType, qualityEvent.getEventRates().get(eventType.getEventNumberIndex())))
-                .toArray();
+        List<RankedEvent> ranks = Arrays.stream(EventType.values())
+                .map(eventType -> calculateRank(localDate, eventType, qualityEvent.getEventRates().get(eventType.getEventNumberIndex())))
+                .collect(Collectors.toList());
 
         return new RankedRoad(localDate, qualityEvent.getRoadId(), ranks);
     }
 
 
-    int calculateRank(LocalDate localDate, EventType eventType, double eventRate) {
+    RankedEvent calculateRank(LocalDate localDate, EventType eventType, double eventRate) {
         List<Double> limits = ranksManager.getLimits(localDate, eventType.getEventNumberIndex());
         int rank = 0;
         for (int i = 0; i < limits.size(); i++) {
@@ -52,6 +53,6 @@ public class CalibrationServiceImpl implements CalibrationService {
         if(!eventType.isPositive()){
             rank=limits.size()+2-rank;
         }
-        return rank;
+        return new RankedEvent(eventType,rank);
     }
 }

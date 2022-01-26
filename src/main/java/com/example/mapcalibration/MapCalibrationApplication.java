@@ -8,9 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MapCalibrationApplication {
 
     public static void main(String[] args) {
-
         SpringApplication.run(MapCalibrationApplication.class, args);
-
     }
 
 }

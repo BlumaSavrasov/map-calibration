@@ -36,7 +36,7 @@ public class RanksManager {
         calculateRanks();
     }
 
-    private void calculateRanks() {
+    public void calculateRanks() {
         Map<LocalDate, List<QualityEvent>> qualityEventsPerDay = qualityEventRepo.getLastWeekEvents();
         qualityEventsPerDay.forEach((localDate, qualityEvents) -> ranksMap.put(localDate, calculateRanks(localDate, qualityEvents)));
     }

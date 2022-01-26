@@ -16,14 +16,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CalibrationServiceImpl implements CalibrationService {
 
-
-
     private final QualityEventRepo qualityEventRepo;
+
     private final RanksManager ranksManager;
 
     @Override
     public List<RankedRoad> calibrate(int roadId) {
-        return qualityEventRepo.findAll(roadId).stream().map(this::rankRoad).collect(Collectors.toList());
+        return qualityEventRepo.findByRoadIdEquals(roadId).stream().map(this::rankRoad).collect(Collectors.toList());
     }
 
     private RankedRoad rankRoad(QualityEvent qualityEvent) {

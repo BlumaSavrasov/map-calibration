@@ -24,24 +24,24 @@ class CalibrationServiceImplTest {
 
     @Test
     void calculateTestEvent1Rank() {
-        int rank = calibrationService.calculateRank(null, EventType.EVENT_1, 0.1);
+        int rank = calibrationService.calculateRank(null, EventType.EVENT_1, 0.1).getRank();
         assertEquals(4,rank);
-        rank = calibrationService.calculateRank(null,EventType.EVENT_1,0.3);
+        rank = calibrationService.calculateRank(null,EventType.EVENT_1,0.3).getRank();
         assertEquals(3,rank);
-        rank = calibrationService.calculateRank(null,EventType.EVENT_1,0.5);
+        rank = calibrationService.calculateRank(null,EventType.EVENT_1,0.5).getRank();
         assertEquals(2,rank);
-        rank = calibrationService.calculateRank(null,EventType.EVENT_1,0.8);
+        rank = calibrationService.calculateRank(null,EventType.EVENT_1,0.8).getRank();
         assertEquals(1,rank);
     }
     @Test
     void calculateTestEvent3Rank() {
-        int rank = calibrationService.calculateRank(null, EventType.EVENT_3, 0.1);
+        int rank = calibrationService.calculateRank(null, EventType.EVENT_3, 0.1).getRank();
         assertEquals(1,rank);
-        rank = calibrationService.calculateRank(null,EventType.EVENT_3,0.3);
+        rank = calibrationService.calculateRank(null,EventType.EVENT_3,0.3).getRank();
         assertEquals(2,rank);
-        rank = calibrationService.calculateRank(null,EventType.EVENT_3,0.5);
+        rank = calibrationService.calculateRank(null,EventType.EVENT_3,0.5).getRank();
         assertEquals(3,rank);
-        rank = calibrationService.calculateRank(null,EventType.EVENT_3,0.8);
+        rank = calibrationService.calculateRank(null,EventType.EVENT_3,0.8).getRank();
         assertEquals(4,rank);
     }
 }
